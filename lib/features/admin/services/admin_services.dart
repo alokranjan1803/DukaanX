@@ -25,7 +25,7 @@ class AdminServices {
   }) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
-      final cloudinary = CloudinaryPublic('durj8udhw', 'dxj18pnq');
+      final cloudinary = CloudinaryPublic('cloudname', 'uploadPreset');
       List<String> imageUrls = [];
 
       for (int i = 0; i < images.length; i++) {
