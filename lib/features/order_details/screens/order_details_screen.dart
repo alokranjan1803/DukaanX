@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:dukaanx/common/widgets/custom_button.dart';
 import 'package:dukaanx/constraints/global_variables.dart';
 import 'package:dukaanx/features/admin/services/admin_services.dart';
@@ -32,6 +33,11 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
   void initState() {
     super.initState();
     currentStep = widget.order.status;
+  }
+
+  void goTo(int step) {
+    setState(() =>
+        currentStep = max(0, min(step, 3))); // 3 is the maximum valid index
   }
 
   // !!! ONLY FOR ADMIN!!!
@@ -105,7 +111,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                             width: 1,
                           ),
                         ),
-                        hintText: 'Search Amazon.in',
+                        hintText: 'Search DukaanX.in',
                         hintStyle: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 17,
@@ -153,7 +159,6 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       DateTime.fromMillisecondsSinceEpoch(
                           widget.order.orderedAt),
                     )}'),
-                    Text('Order ID:          ${widget.order.id}'),
                     Text('Order Total:      \$${widget.order.totalPrice}'),
                   ],
                 ),
@@ -223,7 +228,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   ),
                 ),
                 child: Stepper(
-                  currentStep: currentStep,
+                  // currentStep: currentStep,
                   controlsBuilder: (context, details) {
                     if (user.type == 'admin') {
                       return CustomButton(
@@ -239,8 +244,8 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       content: const Text(
                         'Your order is yet to be delivered',
                       ),
-                      isActive: currentStep > 0,
-                      state: currentStep > 0
+                      isActive: currentStep >= 0,
+                      state: currentStep >= 0
                           ? StepState.complete
                           : StepState.indexed,
                     ),
@@ -249,8 +254,8 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       content: const Text(
                         'Your order has been delivered, you are yet to sign.',
                       ),
-                      isActive: currentStep > 1,
-                      state: currentStep > 1
+                      isActive: currentStep >= 1,
+                      state: currentStep >= 1
                           ? StepState.complete
                           : StepState.indexed,
                     ),
@@ -259,8 +264,8 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                       content: const Text(
                         'Your order has been delivered and signed by you.',
                       ),
-                      isActive: currentStep > 2,
-                      state: currentStep > 2
+                      isActive: currentStep >= 2,
+                      state: currentStep >= 2
                           ? StepState.complete
                           : StepState.indexed,
                     ),
@@ -275,6 +280,15 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                           : StepState.indexed,
                     ),
                   ],
+                  currentStep: currentStep < 0
+                      ? 0
+                      : (currentStep >= 3 ? 2 : currentStep),
+                  onStepContinue: () {
+                    goTo(currentStep + 1);
+                  },
+                  onStepCancel: () {
+                    goTo(currentStep - 1);
+                  },
                 ),
               ),
             ],

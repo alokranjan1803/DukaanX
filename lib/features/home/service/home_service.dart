@@ -39,10 +39,9 @@ class HomeService {
         );
       }
     } catch (e) {
-      if(context.mounted){
+      if (context.mounted) {
         showSnackBar(context, e.toString());
       }
-      
     }
     return productList;
   }
@@ -78,10 +77,9 @@ class HomeService {
             });
       }
     } catch (e) {
-      if(context.mounted){
+      if (context.mounted) {
         showSnackBar(context, e.toString());
       }
-      
     }
     return product;
   }

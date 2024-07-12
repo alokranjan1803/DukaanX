@@ -6,8 +6,6 @@ import 'package:dukaanx/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
-import 'package:dukaanx/payment_configuration.dart';
-
 
 class AddressScreen extends StatefulWidget {
   static const String routeName = '/address';
@@ -26,6 +24,9 @@ class _AddressScreenState extends State<AddressScreen> {
   final _addressFormKey = GlobalKey<FormState>();
   String addressToBeUsed = '';
   final AddressService addressService = AddressService();
+
+  final Future<PaymentConfiguration> _googlePayConfigFuture =
+      PaymentConfiguration.fromAsset('gpay.json');
 
   List<PaymentItem> paymentItem = [];
 
@@ -173,17 +174,21 @@ class _AddressScreenState extends State<AddressScreen> {
                   ],
                 ),
               ),
-              GooglePayButton(
-                      paymentConfiguration: PaymentConfiguration.fromJsonString(
-                defaultGooglePay),
-                      paymentItems: paymentItem,
-                      type: GooglePayButtonType.buy,
-                      margin: const EdgeInsets.only(top: 15.0),
-                      onPaymentResult: onGpayResult,
-                      loadingIndicator: const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
+              FutureBuilder<PaymentConfiguration>(
+                  future: _googlePayConfigFuture,
+                  builder: (context, snapshot) => snapshot.hasData
+                      ? GooglePayButton(
+                          onPressed: () => payPressed(address),
+                          paymentConfiguration: snapshot.data!,
+                          paymentItems: paymentItem,
+                          type: GooglePayButtonType.buy,
+                          margin: const EdgeInsets.only(top: 15.0),
+                          onPaymentResult: onGpayResult,
+                          loadingIndicator: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        )
+                      : const SizedBox.shrink()),
             ],
           ),
         ),

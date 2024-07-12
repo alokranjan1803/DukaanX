@@ -25,7 +25,9 @@ class _OrdersState extends State<Orders> {
 
   void fetchOrders() async {
     orders = await accountServices.fetchMyOrders(context: context);
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   @override

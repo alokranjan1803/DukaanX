@@ -46,6 +46,15 @@ userRouter.delete("/api/remove-from-cart/:id", auth, async (req, res) =>{
         const product = await Product.findById(id);
         let user = await User.findById(req.user);
 
+        // if (!product) {
+        //     // Remove the product from the user's cart
+        //     user.cart = user.cart.filter(item => !item.product._id.equals(id));
+        //     await user.save();
+
+        //     return res.status(404).json({ message: "This product has been removed from your cart because it no longer exists." });
+        // }
+
+
         for(let i=0; i<user.cart.length; i++){
             if(user.cart[i].product._id.equals(product._id)){
                 if(user.cart[i].quantity == 1){
@@ -63,6 +72,23 @@ userRouter.delete("/api/remove-from-cart/:id", auth, async (req, res) =>{
     }
 
 });
+
+
+// clear every thing from cart
+
+// userRouter.post("/api/clear-cart", auth, async(req, res) =>{
+//     try {
+//         let user = await User.findById(req.user);
+
+//         // Clear the cart
+//         user.cart = [];
+//         await user.save();
+
+//         res.json(user);
+//     } catch (e) {
+//         res.status(500).json({error: e.message});
+//     }
+// });
 
 // save user address
 

@@ -35,7 +35,7 @@ class _AdminScrenState extends State<AdminScren> {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
+        preferredSize: const Size.fromHeight(60),
         child: AppBar(
           flexibleSpace: Container(
             decoration: const BoxDecoration(
@@ -48,23 +48,24 @@ class _AdminScrenState extends State<AdminScren> {
               Container(
                 alignment: Alignment.topLeft,
                 child: RichText(
-                  text: TextSpan(
-                    style: DefaultTextStyle.of(context).style,
-                    children: <TextSpan>[
+                  text: const TextSpan(
+                    children: [
                       TextSpan(
-                        text: 'Dukaan',
+                        text: 'Dukaan ',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
                           fontSize: 35,
-                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          color: Colors
+                              .black, // Change this to your preferred color for 'Sign'
                         ),
                       ),
                       TextSpan(
                         text: 'X',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
                           fontSize: 35,
-                          color: Colors.deepOrange,
+                          fontWeight: FontWeight.bold,
+                          color: Colors
+                              .deepOrange, // Change this to your preferred color for 'In.'
                         ),
                       ),
                     ],

@@ -63,13 +63,13 @@ class AdminServices {
         );
       }
     } catch (e) {
-      if(context.mounted){
+      if (context.mounted) {
         showSnackBar(context, e.toString());
       }
-      
     }
   }
 
+// GET ALL Products
   Future<List<Product>> fetchAllProducts(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Product> productList = [];
@@ -95,10 +95,9 @@ class AdminServices {
             });
       }
     } catch (e) {
-      if(context.mounted){
+      if (context.mounted) {
         showSnackBar(context, e.toString());
       }
-      
     }
     return productList;
   }
@@ -130,10 +129,9 @@ class AdminServices {
         );
       }
     } catch (e) {
-      if(context.mounted){
+      if (context.mounted) {
         showSnackBar(context, e.toString());
       }
-      
     }
   }
 
@@ -164,10 +162,9 @@ class AdminServices {
         );
       }
     } catch (e) {
-      if(context.mounted){
+      if (context.mounted) {
         showSnackBar(context, e.toString());
       }
-      
     }
     return orderList;
   }
@@ -200,10 +197,9 @@ class AdminServices {
         );
       }
     } catch (e) {
-      if(context.mounted){
+      if (context.mounted) {
         showSnackBar(context, e.toString());
       }
-      
     }
   }
 
@@ -236,10 +232,9 @@ class AdminServices {
         );
       }
     } catch (e) {
-      if(context.mounted){
+      if (context.mounted) {
         showSnackBar(context, e.toString());
       }
-      
     }
     return {
       'sales': sales,

@@ -25,9 +25,6 @@ class _BottomBarState extends State<BottomBar> {
     const HomeScreen(),
     const AccountScreen(),
     const CartScreen(),
-    const Center(
-      child: Text('Cart Page'),
-    ),
   ];
 
   void updatePage(int page) {
@@ -46,7 +43,7 @@ class _BottomBarState extends State<BottomBar> {
         currentIndex: _page,
         selectedItemColor: GlobalVariables.selectedNavBarColor,
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: GlobalVariables.backgroundColor,
         iconSize: 28,
         onTap: updatePage,
         items: [

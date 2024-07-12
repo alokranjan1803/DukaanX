@@ -8,6 +8,9 @@ const auth = require("../middleware/auth");
 //Sign up
 authRouter.post("/api/signup", async (req, res) => {
   //get the data from client
+  // post the data in database 
+  // return that data to the user
+
 
   try {
     const { name, email, password } = req.body;
@@ -26,7 +29,7 @@ authRouter.post("/api/signup", async (req, res) => {
       name,
     });
     user = await user.save();
-    res.json(user);
+    res.status(200).json(user);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -50,8 +53,9 @@ authRouter.post("/api/signin", async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ msg: "Incorrect password" });
     }
+    // password match
     const token = jwt.sign({ id: user._id }, "passwordKey");
-    res.json({ token, ...user._doc });
+    res.status(200).json({ token, ...user._doc });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -85,5 +89,5 @@ authRouter.get("/", auth, async (req, res) => {
     const user = await User.findById(req.user);
     res.json({...user._doc, token: req.token});
 });
-
 module.exports = authRouter;
+

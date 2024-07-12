@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
     return ScaffoldMessenger(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Amazon Clone',
+        title: 'DukaanX',
         theme: themeProvider.isDarkTheme
             ? ThemeData.dark().copyWith(
                 scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 0),

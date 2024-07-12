@@ -42,9 +42,9 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 height: 250,
-                child: CategoryProductsChart(),
+                child: CategoryProductsChart(salesData: earnings!),
               )
             ],
           );
