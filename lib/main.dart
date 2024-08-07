@@ -8,17 +8,24 @@ import 'package:dukaanx/providers/user_provider.dart';
 import 'package:dukaanx/router.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (context) => UserProvider(),
+Future<void> main() async {
+  await dotenv.load(fileName: ".env"); // Load environment variables
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ThemeProvider(),
+        ),
+      ],
+      child: const MyApp(),
     ),
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-    ),
-  ], child: const MyApp()));
+  );
 }
 
 class MyApp extends StatefulWidget {
