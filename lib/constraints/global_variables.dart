@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-String uri = 'http://192.168.94.166:3000';
+String uri = dotenv.env['API_URL'] ?? 'http://localhost:3000';
 
 class GlobalVariables {
   // COLORS
